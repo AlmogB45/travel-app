@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
+import { RouterOutlet, RouterModule } from '@angular/router';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
-import { UpcomingTripsComponent } from "./components/upcoming-trips/upcoming-trips.component";
+import { UpcomingTripsComponent } from './components/upcoming-trips/upcoming-trips.component';
+import { CurrencyExchangeComponent } from './components/currency-exchange/currency-exchange.component';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [LandingPageComponent, UpcomingTripsComponent],
+  imports: [RouterOutlet, RouterModule, LandingPageComponent, UpcomingTripsComponent, CurrencyExchangeComponent ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
-
 export class AppComponent {
   title = 'travel-app';
 }
-
-

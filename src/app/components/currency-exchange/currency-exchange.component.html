@@ -1,0 +1,21 @@
+<div>
+    <input [(ngModel)]="amount" type="number" placeholder="Amount" />
+  
+    <select [(ngModel)]="base" (change)="convert()">
+      <option *ngFor="let symbol of symbols" [value]="symbol.code">
+        {{ symbol.code }} - {{ symbol.name }}
+      </option>
+    </select>
+  
+    <select [(ngModel)]="target" (change)="convert()">
+      <option *ngFor="let symbol of symbols" [value]="symbol.code">
+        {{ symbol.code }} - {{ symbol.name }}
+      </option>
+    </select>
+  
+    <button (click)="convert()">Convert</button>
+  
+    <div *ngIf="result !== null">
+      Result: {{ result | number:'1.2-2' }} {{ target }}
+    </div>
+  </div>

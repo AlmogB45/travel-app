@@ -1,9 +1,28 @@
 <div class="upcoming-trips-container">
-    <h1>Upcoming Trips</h1>
-
-    <ul>
-        @for (trip of tripService.trips; track trip.id) {
-            <li>{{trip.destination}} - {{trip.startDate.getDate()}} until {{trip.endDate}}</li>
-        }
-    </ul>
+  <h1>Upcoming Trips</h1>
+  <ul>
+    <li *ngFor="let trip of tripService.trips; trackBy: trackByTripId">
+      <a [routerLink]="['/trip', trip.id]">
+        {{ trip.destination }} - {{ trip.startDate.toLocaleDateString() }} ->
+        {{ trip.endDate.toLocaleDateString() }}
+      </a>
+    </li>
+  </ul>
 </div>
+
+
+
+
+
+  <!-- <ul>
+    @for (trip of tripService.trips; track trip.id) {
+    <li>
+      <a [routerLink]="['/trip', trip.id]"></a>
+      {{ trip.destination }} - {{ trip.startDate.toLocaleDateString() }} ->
+      {{ trip.endDate.toLocaleDateString() }}
+    </li>
+    }
+  </ul>
+</div> -->
+
+

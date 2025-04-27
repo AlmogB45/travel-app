@@ -1,0 +1,34 @@
+<h3>Upload Trip Documents</h3>
+
+<form (ngSubmit)="onUpload()">
+  <!-- Document Name -->
+  <div class="form-field">
+    <label for="documentName">Document Name</label>
+    <input type="text" id="documentName" [(ngModel)]="documentName" name="documentName" required />
+  </div>
+
+  <!-- Document Type (dropdown with hardcoded options) -->
+  <div class="form-field">
+    <label for="documentType">Document Type</label>
+    <select id="documentType" [(ngModel)]="documentType" name="documentType" required>
+      <option value="Flight Card">Flight Card</option>
+      <option value="Duty Free Receipt">Duty Free Receipt</option>
+      <option value="Travel Insurance">Travel Insurance</option>
+      <option value="Hotel Reservation">Hotel Reservation</option>
+      <option value="Car Rental">Car Rental</option>
+      <option value="Tickets">Tickets</option>
+      <option value="Receipts">Receipts</option>
+      <option value="Itinerary">Itinerary</option>
+    </select>
+  </div>
+
+  <!-- File Selection -->
+  <div class="form-field">
+    <label for="fileInput">Select Document</label>
+    <input type="file" id="fileInput" (change)="onFileSelected($event)" />
+  </div>
+
+  <button type="submit">Upload Document</button>
+
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+</form>

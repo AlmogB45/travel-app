@@ -1,9 +1,12 @@
 <div class="header">
   <h1 id="title">Welcome to Travel App!</h1>
-  <h3 id="desc">Please select your dates</h3>
 </div>
 
-<div id="body">
-  <landing-page></landing-page>
-  <upcoming-trips></upcoming-trips>
-</div>
+<nav>
+  <a routerLink="/">Trip Planner</a> |
+  <a routerLink="/currency-exchange">Currency Exchange</a> |
+  <a routerLink="/upcoming-trips">Upcoming Trips</a> |
+  <!-- <a routerLink="/attractions">Attractions</a> | -->
+</nav>
+
+<router-outlet></router-outlet>
