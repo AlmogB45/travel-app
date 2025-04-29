@@ -8,7 +8,7 @@ import { CurrencyExchangeComponent } from './components/currency-exchange/curren
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, LandingPageComponent, UpcomingTripsComponent, CurrencyExchangeComponent ],
+  imports: [RouterOutlet, RouterModule, LandingPageComponent, UpcomingTripsComponent, CurrencyExchangeComponent ], // OFIR - remove unused imports
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

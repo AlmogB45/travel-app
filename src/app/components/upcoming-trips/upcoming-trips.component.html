@@ -1,6 +1,7 @@
 <div class="upcoming-trips-container">
   <h1>Upcoming Trips</h1>
   <ul>
+    <!-- OFIR - here you can use 'trips' instead of 'tripService.trips' because you set up a getter in the component -->
     <li *ngFor="let trip of tripService.trips; trackBy: trackByTripId">
       <a [routerLink]="['/trip', trip.id]">
         {{ trip.destination }} - {{ trip.startDate.toLocaleDateString() }} ->

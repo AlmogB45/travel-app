@@ -11,6 +11,7 @@
   <div class="form-field">
     <label for="documentType">Document Type</label>
     <select id="documentType" [(ngModel)]="documentType" name="documentType" required>
+      <!-- OFIR - create an enum (better) or array for document types and use it here with ngFor or @for -->
       <option value="Flight Card">Flight Card</option>
       <option value="Duty Free Receipt">Duty Free Receipt</option>
       <option value="Travel Insurance">Travel Insurance</option>

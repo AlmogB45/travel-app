@@ -22,9 +22,9 @@ import { TripService } from '../../services/trip.service';
 export class LandingPageComponent {
   tripService = inject(TripService);
   destinationText: string = '';
-  startDate: string = '';
-  endDate: string = '';
-  errorMessage: string = '';
+  startDate: string = ''; // OFIR - consider making this a Date object instead of a string for better type safety 
+  endDate: string = ''; // OFIR - same
+  errorMessage: string = ''; // OFIR - where is this displayed in case of an error?
 
   onSubmit() {
     this.errorMessage = '';

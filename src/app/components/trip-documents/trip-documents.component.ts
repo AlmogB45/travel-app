@@ -15,7 +15,7 @@ export class TripDocumentsComponent {
   @Input() tripId!: number; // Trip ID to associate doc with
   tripService = inject(TripService);
   documentName: string = '';
-  documentType: string = '';
+  documentType: string = ''; // OFIR - consider using an enum for document types
   documentFile: File | null = null;
   errorMessage: string = '';
 

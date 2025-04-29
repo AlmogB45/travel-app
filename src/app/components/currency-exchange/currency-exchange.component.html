@@ -18,4 +18,12 @@
     <div *ngIf="result !== null">
       Result: {{ result | number:'1.2-2' }} {{ target }}
     </div>
+
+    <!-- OFIR - example of the same as ^ but with the new syntax (@if). uncomment below and check if it works -->
+
+    <!-- @if (result !== null) {
+      <div>
+        Result: {{ result | number:'1.2-2' }} {{ target }}
+      </div>
+    } -->
   </div>

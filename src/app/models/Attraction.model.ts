@@ -3,5 +3,5 @@ export interface Attraction {
     desc: String;
     startDate: Date;
     time: String;
-    type: String;
+    type: String; // OFIR - consider using an enum for type
   }

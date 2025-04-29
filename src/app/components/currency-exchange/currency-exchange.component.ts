@@ -19,6 +19,7 @@ export class CurrencyExchangeComponent implements OnInit {
   result: number | null = null; // Result of the conversion
   errorMessage: string = '';
 
+  // OFIR - you can (but dont have to) use the 'inject' function instead of constructor injection for cleaner code
   constructor(private currencyExchangeService: CurrencyExchangeService) {} // Injecting the service
 
   ngOnInit() {
@@ -29,6 +30,7 @@ export class CurrencyExchangeComponent implements OnInit {
     this.currencyExchangeService.getCurrencySymbols().subscribe({
       next: (data) => {
         // Assuming the data comes as an object, mapping it to the symbols array
+        // OFIR - better to not assume, use a type for the response
         this.symbols = Object.entries(data).map(([code, value]: any) => ({
           code: code.toUpperCase(),
           name: value.name
@@ -45,7 +47,7 @@ export class CurrencyExchangeComponent implements OnInit {
   convert() {
     this.currencyExchangeService.getAllRates(this.base).subscribe({
       next: (data) => {
-        const rate = data.rates[this.target];
+        const rate = data.rates[this.target]; // OFIR - add type for 'data' and 'rate' OR use optional chaining to avoid undefined errors, e.g. data?.rates?.[this.target]
         if (rate) {
           this.result = this.amount * rate;
         } else {

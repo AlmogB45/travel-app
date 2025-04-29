@@ -13,7 +13,8 @@ export class UpcomingTripsComponent {
 
   tripService = inject(TripService);
 
-  get trips() {
+  // OFIR - you set a 'getter' which is great but you never use it (check HTML file)
+  get trips() { 
     return this.tripService.trips; // Access the trips from the service
   }
 

@@ -17,7 +17,7 @@ export class TripDetailsComponent {
   tripService = inject(TripService)
 
   tripId!: number; //"!" promises that tripId will be defined as num
-  trip: any;
+  trip: any; // OFIR - why not use the 'Trip' type?
 
   ngOnInit() {
     // Subscribe to the route parameters to get the tripId
@@ -37,7 +37,9 @@ export class TripDetailsComponent {
   }
 
    // Method to add an attraction to the current trip
-   addAttraction(type: string, desc: string, startDate: string, time: string) {
+   // OFIR - I would create an enum with all the types of attractions and use it as type here
+   // OFIR - for example - (type: AttractionType, .......)
+   addAttraction(type: string, desc: string, startDate: string, time: string) { 
     if (!desc || !startDate || !time) {
       alert('Please fill in the required information!')
       return;
