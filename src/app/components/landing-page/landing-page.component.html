@@ -1,7 +1,9 @@
-<!-- OFIR - add label or placeholder so user knows what to enter -->
-<input type="text" [(ngModel)]="destinationText"/>
+<div class = "landing-page-container">
+<div id="destination-input">
+<input type="text" [(ngModel)]="destinationText" placeholder="Destination" />
+</div>
 
-<mat-form-field>
+<mat-form-field id="date-range-picker">
   <mat-label>Enter a date range</mat-label>
   <mat-date-range-input [rangePicker]="picker">
     <input matStartDate [(ngModel)]="startDate" placeholder="Start date" />
@@ -13,3 +15,4 @@
 </mat-form-field>
 
 <button (click)="onSubmit()">Submit</button>
+</div>

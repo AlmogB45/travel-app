@@ -1,7 +1,18 @@
+export enum AttractionType {
+  Concert = "Concert",
+  Gallery = "Gallery",
+  Zoo = "Zoo",
+  Park = "Park",
+  Sightseeing = "Sightseeing"
+}
+
+
+
 export interface Attraction {
     id: number;
     desc: String;
     startDate: Date;
     time: String;
-    type: String; // OFIR - consider using an enum for type
+    type: AttractionType;
   }
+

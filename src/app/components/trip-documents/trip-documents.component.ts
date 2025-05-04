@@ -3,6 +3,7 @@ import { TripService } from '../../services/trip.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
+import { DocsType } from '../../models/TripDocument.model';
 
 @Component({
   selector: 'app-trip-documents',
@@ -15,7 +16,8 @@ export class TripDocumentsComponent {
   @Input() tripId!: number; // Trip ID to associate doc with
   tripService = inject(TripService);
   documentName: string = '';
-  documentType: string = ''; // OFIR - consider using an enum for document types
+  DocsTypes = Object.values(DocsType);
+  documentType: DocsType = DocsType.FlightCard;;
   documentFile: File | null = null;
   errorMessage: string = '';
 
@@ -35,10 +37,9 @@ export class TripDocumentsComponent {
 
     // Add document to trip
     this.tripService.addDocument(this.tripId, this.documentName, this.documentType, url);
-
+    
     // Reset form
     this.documentName = '';
-    this.documentType = '';
     this.documentFile = null;
   }
 }

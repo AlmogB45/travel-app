@@ -9,17 +9,8 @@
 
   <!-- Document Type (dropdown with hardcoded options) -->
   <div class="form-field">
-    <label for="documentType">Document Type</label>
-    <select id="documentType" [(ngModel)]="documentType" name="documentType" required>
-      <!-- OFIR - create an enum (better) or array for document types and use it here with ngFor or @for -->
-      <option value="Flight Card">Flight Card</option>
-      <option value="Duty Free Receipt">Duty Free Receipt</option>
-      <option value="Travel Insurance">Travel Insurance</option>
-      <option value="Hotel Reservation">Hotel Reservation</option>
-      <option value="Car Rental">Car Rental</option>
-      <option value="Tickets">Tickets</option>
-      <option value="Receipts">Receipts</option>
-      <option value="Itinerary">Itinerary</option>
+    <select [(ngModel)]="documentType" name="documentType">
+      <option *ngFor="let type of DocsTypes" [ngValue]="type">{{ type }}</option>
     </select>
   </div>
 

@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterModule } from '@angular/router';
-import { LandingPageComponent } from './components/landing-page/landing-page.component';
-import { UpcomingTripsComponent } from './components/upcoming-trips/upcoming-trips.component';
-import { CurrencyExchangeComponent } from './components/currency-exchange/currency-exchange.component';
-
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, LandingPageComponent, UpcomingTripsComponent, CurrencyExchangeComponent ], // OFIR - remove unused imports
+  imports: [RouterOutlet, RouterModule], 
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

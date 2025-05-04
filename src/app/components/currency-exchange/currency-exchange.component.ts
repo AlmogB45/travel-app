@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CurrencyExchangeService } from '../../services/currency.exchange.service';
 import { FormsModule } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
@@ -19,19 +19,17 @@ export class CurrencyExchangeComponent implements OnInit {
   result: number | null = null; // Result of the conversion
   errorMessage: string = '';
 
-  // OFIR - you can (but dont have to) use the 'inject' function instead of constructor injection for cleaner code
-  constructor(private currencyExchangeService: CurrencyExchangeService) {} // Injecting the service
-
+  // constructor(private currencyExchangeService: CurrencyExchangeService) {} // Injecting the service
+  currencyService = inject(CurrencyExchangeService); // Using inject function for cleaner code
   ngOnInit() {
     this.loadCurrencySymbols();
   }
 
   loadCurrencySymbols() {
-    this.currencyExchangeService.getCurrencySymbols().subscribe({
+    this.currencyService.getCurrencySymbols().subscribe({
       next: (data) => {
         // Assuming the data comes as an object, mapping it to the symbols array
-        // OFIR - better to not assume, use a type for the response
-        this.symbols = Object.entries(data).map(([code, value]: any) => ({
+        this.symbols = Object.entries(data).map(([code, value]) => ({
           code: code.toUpperCase(),
           name: value.name
         }));
@@ -45,9 +43,9 @@ export class CurrencyExchangeComponent implements OnInit {
   }
 
   convert() {
-    this.currencyExchangeService.getAllRates(this.base).subscribe({
+    this.currencyService.getAllRates(this.base).subscribe({
       next: (data) => {
-        const rate = data.rates[this.target]; // OFIR - add type for 'data' and 'rate' OR use optional chaining to avoid undefined errors, e.g. data?.rates?.[this.target]
+        const rate = data.rates[this.target]; 
         if (rate) {
           this.result = this.amount * rate;
         } else {

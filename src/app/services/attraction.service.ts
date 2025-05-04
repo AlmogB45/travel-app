@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Attraction } from '../models/Attraction.model';
+import { Attraction, AttractionType } from '../models/Attraction.model';
 import { TripService } from './trip.service';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class AttractionService {
 
   addAttraction(
     tripId: number,
-    type: string,
+    type: AttractionType,
     desc: string,
     startDate: string,
     time: string

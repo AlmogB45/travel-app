@@ -10,6 +10,7 @@ import { TripService } from '../../services/trip.service';
   selector: 'landing-page',
   standalone: true,
   templateUrl: './landing-page.component.html',
+  styleUrls: ['./landing-page.component.scss'],
   imports: [
     MatFormFieldModule,
     MatDatepickerModule,
@@ -22,17 +23,13 @@ import { TripService } from '../../services/trip.service';
 export class LandingPageComponent {
   tripService = inject(TripService);
   destinationText: string = '';
-  startDate: string = ''; // OFIR - consider making this a Date object instead of a string for better type safety 
-  endDate: string = ''; // OFIR - same
-  errorMessage: string = ''; // OFIR - where is this displayed in case of an error?
+  startDate: Date = new Date(); 
+  endDate: Date = new Date(); 
 
   onSubmit() {
-    this.errorMessage = '';
 
     // Check if any required fields are empty
     if (!this.destinationText || !this.startDate || !this.endDate) {
-      this.errorMessage =
-        'Please fill in all fields: destination, start date, and end date!';
       return; // Stop the method if validation fails
     }
 
@@ -42,7 +39,7 @@ export class LandingPageComponent {
       this.endDate
     );
     this.destinationText = '';
-    this.startDate = '';
-    this.endDate = '';
+    this.startDate = new Date();
+    this.endDate = new Date();
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Trip } from '../models/Trip.model';
-import { TripDocument } from '../models/TripDocument.model';
+import { DocsType, TripDocument } from '../models/TripDocument.model';
+import { AttractionType } from '../models/Attraction.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class TripService {
 
   // add a new trip to the trips array
   // the logic is in the service so it can be reused in other components
-  addTrip(destination: string, startDate: string, endDate: string) {
+  addTrip(destination: string, startDate: Date, endDate: Date) {
     const newTrip: Trip = {
       id: this.trips.length, //Assign unique ID based by arr length
       destination,
@@ -27,7 +28,7 @@ export class TripService {
   // Add an attraction to a specific trip by its ID
   addAttraction(
     tripId: number,
-    type: string,
+    type: AttractionType,
     desc: string,
     startDate: string,
     time: string
@@ -52,7 +53,7 @@ export class TripService {
   }
 
   // Method to add a document to a specific trip
-  addDocument(tripId: number, name: string, type: string, url: string) {
+  addDocument(tripId: number, name: string, type: DocsType, url: string) {
     const trip = this.trips.find((t) => t.id === tripId);
     if (trip) {
       const newDocument: TripDocument = {

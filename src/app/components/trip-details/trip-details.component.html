@@ -12,19 +12,14 @@
     <h3>Add New Attraction</h3>
     <div>
       <select #typeSelect>
-        <!-- OFIR - create an enum (better) or array for attraction and use it here with ngFor or @for -->
-        <option value="Concert">Concert</option>
-        <option value="Gallery">Gallery</option>
-        <option value="Zoo">Zoo</option>
-        <option value="Park">Park</option>
-        <option value="Sightseeing">Sightseeing</option>
+        <option *ngFor="let type of attractionTypes" [value]="type">{{ type }}</option>
       </select>
   
       <input type="text" #descInput placeholder="Description">
       <input type="date" #startInput>
       <input type="time" #timeInput>
   
-      <button (click)="addAttraction(typeSelect.value, descInput.value, startInput.value, timeInput.value)">
+      <button (click)="addAttraction(getAttractionType(typeSelect.value), descInput.value, startInput.value, timeInput.value)">
         Add Attraction
       </button>
 
