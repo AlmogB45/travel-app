@@ -1,8 +1,9 @@
-import { Attraction } from "./Attraction.model";
-import { TripDocument } from "./TripDocument.model";
+import { Attraction } from './Attraction.model';
+import { TripDocument } from './TripDocument.model';
 
 export interface Trip {
-  id: number;
+  user_id: string;
+  id: string;
   destination: string;
   startDate: Date;
   endDate: Date;

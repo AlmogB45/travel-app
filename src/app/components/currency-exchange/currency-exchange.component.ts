@@ -9,7 +9,9 @@ import { HttpErrorResponse } from '@angular/common/http';
   standalone: true,
   imports: [FormsModule, CommonModule],
   providers: [CurrencyExchangeService],  // Add CurrencyExchangeService to the component's providers array
-  templateUrl: './currency-exchange.component.html'
+  templateUrl: './currency-exchange.component.html',
+  styleUrls: ['./currency-exchange.component.scss'],
+
 })
 export class CurrencyExchangeComponent implements OnInit {
   symbols: { code: string, name: string }[] = []; // Array to hold currency symbols

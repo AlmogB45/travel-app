@@ -10,6 +10,7 @@ export enum AttractionType {
 
 export interface Attraction {
     id: number;
+    trip_id: string;
     desc: String;
     startDate: Date;
     time: String;

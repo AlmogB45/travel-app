@@ -13,7 +13,7 @@ import { DocsType } from '../../models/TripDocument.model';
   styleUrl: './trip-documents.component.scss'
 })
 export class TripDocumentsComponent {
-  @Input() tripId!: number; // Trip ID to associate doc with
+  @Input() tripId!: string; // Trip ID to associate doc with
   tripService = inject(TripService);
   documentName: string = '';
   DocsTypes = Object.values(DocsType);
@@ -35,11 +35,42 @@ export class TripDocumentsComponent {
 
     const url = URL.createObjectURL(this.documentFile);
 
-    // Add document to trip
-    this.tripService.addDocument(this.tripId, this.documentName, this.documentType, url);
-    
-    // Reset form
-    this.documentName = '';
-    this.documentFile = null;
+    const userId = localStorage.getItem('user_id');
+    if (!userId) {
+      this.errorMessage = 'You must be logged in to upload a document.';
+      return;
+    }
+
+    // Add document to trip and subscribe to the result
+    this.tripService.addDocument(
+      this.tripId.toString(),
+      this.documentName,
+      this.documentType,
+      url,
+      userId
+    ).subscribe({
+      next: (document) => {
+        this.errorMessage = '';
+        this.documentName = '';
+        this.documentFile = null;
+
+        // Update the trip's documents array directly
+        this.tripService.fetchDocuments(this.tripId).subscribe({
+          next: (documents) => {
+            console.log('Documents reloaded:', documents);
+            // Assuming the parent component binds to this service's data
+            this.tripService.trips.find(t => t.id === this.tripId)!.documents = documents;
+          },
+          error: () => {
+            console.error('Failed to reload documents.');
+          }
+        });
+
+        alert('Document added successfully!');
+      },
+      error: () => {
+        this.errorMessage = 'Failed to upload document.';
+      }
+    });
   }
 }

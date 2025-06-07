@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Trip } from '../models/Trip.model';
 import { DocsType, TripDocument } from '../models/TripDocument.model';
-import { AttractionType } from '../models/Attraction.model';
+import { Attraction, AttractionType } from '../models/Attraction.model';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,60 +11,151 @@ import { AttractionType } from '../models/Attraction.model';
 export class TripService {
   trips: Trip[] = []; // array of trips
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  fetchTrips(userId: string): Observable<Trip[]> {
+    return this.http
+      .get<{ trips: Trip[] }>(`http://localhost:3000/trips/${userId}`)
+      .pipe(
+        map((res) => {
+          const trips = res.trips.map((trip) => ({
+            id: trip.id,
+            user_id: trip.user_id,
+            destination: trip.destination,
+            startDate: new Date(trip.startDate),
+            endDate: new Date(trip.endDate),
+            attractions: trip.attractions ?? [],
+            documents: trip.documents ?? [],
+          }));
+          this.trips = trips; // Automatically update the trips array
+          return trips;
+        })
+      );
+  }
+
+  fetchDocuments(tripId: string): Observable<TripDocument[]> {
+    return this.http
+      .get<{ documents: TripDocument[] }>(
+        `http://localhost:3000/documents/${tripId}`
+      )
+      .pipe(
+        map((res) => {
+          return res.documents.map((doc) => ({
+            id: doc.id,
+            trip_id: doc.trip_id,
+            user_id: doc.user_id,
+            name: doc.name,
+            type: doc.type,
+            file_url: doc.file_url,
+          }));
+        })
+      );
+  }
+
+  fetchAttractions(tripId: string): Observable<Attraction[]> {
+    return this.http
+      .get<{ attractions: Attraction[] }>(
+        `http://localhost:3000/attractions/${tripId}`
+      )
+      .pipe(
+        map((res) => {
+          return res.attractions.map((attraction) => ({
+            id: attraction.id,
+            trip_id: attraction.trip_id,
+            type: attraction.type,
+            desc: attraction.desc,
+            startDate: new Date(attraction.startDate),
+            time: attraction.time,
+          }));
+        })
+      );
+  }
 
   // add a new trip to the trips array
   // the logic is in the service so it can be reused in other components
-  addTrip(destination: string, startDate: Date, endDate: Date) {
-    const newTrip: Trip = {
-      id: this.trips.length, //Assign unique ID based by arr length
+  addTrip(
+    destination: string,
+    startDate: Date,
+    endDate: Date,
+    userId: string
+  ): Observable<Trip> {
+    const newTrip = {
       destination,
-      startDate: new Date(startDate),
-      endDate: new Date(endDate),
-      attractions: [],
-      documents: [],
+      start_date: startDate,
+      end_date: endDate,
+      user_id: userId,
     };
-    this.trips.push(newTrip); // Add new trip to arr
+    return this.http
+      .post<{ trip: Trip }>('http://localhost:3000/trips', newTrip)
+      .pipe(map((res) => res.trip));
   }
 
-  // Add an attraction to a specific trip by its ID
   addAttraction(
-    tripId: number,
+    tripId: string,
     type: AttractionType,
     desc: string,
     startDate: string,
     time: string
-  ) {
-    // Find the trip by its ID
-    const trip = this.trips.find((t) => t.id === tripId);
-    if (trip) {
-      // Create a new attraction object
-      const newAttraction = {
-        id: trip.attractions.length, // Generate a unique ID for the attraction based on length
-        type,
-        desc,
-        startDate: new Date(startDate), // Convert string to Date
-        time,
-      };
-
-      // Add the new attraction to the trip's attractions array
-      trip.attractions.push(newAttraction);
-    } else {
-      console.error('Trip not found');
+  ): Observable<Attraction> {
+    const tripExists = this.trips.some((t) => t.id === tripId); // Validate tripId locally
+    if (!tripExists) {
+      console.error('Invalid tripId');
+      return throwError(() => new Error('Invalid tripId'));
     }
+
+    const newAttraction = {
+      trip_id: tripId,
+      type,
+      desc,
+      startDate,
+      time,
+    };
+
+    return this.http
+      .post<{ attraction: Attraction }>(
+        'http://localhost:3000/attractions',
+        newAttraction
+      )
+      .pipe(map((res) => res.attraction));
   }
 
   // Method to add a document to a specific trip
-  addDocument(tripId: number, name: string, type: DocsType, url: string) {
-    const trip = this.trips.find((t) => t.id === tripId);
-    if (trip) {
-      const newDocument: TripDocument = {
-        id: trip.documents.length + 1,
-        name,
-        type,
-        url,
-      };
-      trip.documents.push(newDocument); // Add the new document to the trip
+  addDocument(
+    tripId: string,
+    name: string,
+    type: DocsType,
+    url: string,
+    userId: string
+  ): Observable<TripDocument> {
+    const tripExists = this.trips.some((t) => t.id === tripId); // Validate tripId locally
+    if (!tripExists) {
+      console.error('Invalid tripId');
+      return throwError(() => new Error('Invalid tripId'));
     }
+    const newDocument = {
+      trip_id: tripId,
+      name,
+      type,
+      file_url: url,
+      user_id: userId,
+    };
+    return this.http
+      .post<{ document: TripDocument }>(
+        'http://localhost:3000/documents',
+        newDocument
+      )
+      .pipe(map((res) => res.document));
+  }
+
+  deleteAttraction(attractionId: string): Observable<void> {
+    return this.http.delete<void>(
+      `http://localhost:3000/attractions/${attractionId}`
+    );
+  }
+
+  deleteDocument(documentId: string): Observable<void> {
+    return this.http.delete<void>(
+      `http://localhost:3000/documents/${documentId}`
+    );
   }
 }

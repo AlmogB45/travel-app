@@ -9,7 +9,7 @@ export class AttractionService {
   constructor(private tripService: TripService) {}
 
   addAttraction(
-    tripId: number,
+    tripId: string,
     type: AttractionType,
     desc: string,
     startDate: string,
@@ -27,6 +27,7 @@ export class AttractionService {
       desc,
       time,
       type,
+      trip_id: tripId,
     };
     trip.attractions.push(newAttraction);
   }

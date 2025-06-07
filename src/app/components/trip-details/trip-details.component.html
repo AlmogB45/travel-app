@@ -1,37 +1,60 @@
-<div *ngIf="trip">
-    <h1>{{ trip.destination }}</h1>
-    <h3>{{ trip.startDate.toLocaleDateString() }} ➔ {{ trip.endDate.toLocaleDateString() }}</h3>
-  
-    <h2>Attractions</h2>
-    <ul>
-      <li *ngFor="let attraction of trip.attractions">
-        {{ attraction.type }} - "{{ attraction.desc }}" at {{ attraction.startDate.toLocaleDateString() }} {{ attraction.time }}
-      </li>
-    </ul>
-  
-    <h3>Add New Attraction</h3>
-    <div>
-      <select #typeSelect>
-        <option *ngFor="let type of attractionTypes" [value]="type">{{ type }}</option>
-      </select>
-  
-      <input type="text" #descInput placeholder="Description">
-      <input type="date" #startInput>
-      <input type="time" #timeInput>
-  
-      <button (click)="addAttraction(getAttractionType(typeSelect.value), descInput.value, startInput.value, timeInput.value)">
-        Add Attraction
-      </button>
+<div class="trip-details-container" *ngIf="trip">
+  <div class="trip-details-wrapper">
+    <h1 class="trip-title">{{ trip.destination }}</h1>
+    <h3 class="trip-dates">
+      {{ trip.startDate.toLocaleDateString() }} ➔
+      {{ trip.endDate.toLocaleDateString() }}
+    </h3>
 
-      <h3>Documents</h3>
-  <app-trip-documents [tripId]="tripId"></app-trip-documents>
+    <!-- Attractions Section -->
+    <div class="trip-section">
+      <h2 id="attraction-title">Attractions</h2>
+      <ul class="trip-list">
+        <li *ngFor="let attraction of trip?.attractions" class="trip-item">
+          {{ attraction.type }} - "{{ attraction.desc }}" at
+          {{ attraction.startDate | date: 'shortDate' }} {{ attraction.time }}
+          <button (click)="deleteAttraction(attraction.id.toString())" class="delete-btn">X</button>
+        </li>
+      </ul>
+    </div>
 
-  <ul>
-    <li *ngFor="let doc of trip?.documents">
-      <strong>{{ doc.name }}</strong> ({{ doc.type }}) - Uploaded on {{ doc.dateUploaded | date }}
-      <br />
-      <a [href]="doc.url" target="_blank">View Document</a>
-    </li>
-  </ul>
+    <!-- Add Attraction Form -->
+    <div class="trip-section">
+      <h3 id="add-attraction-title">Add New Attraction</h3>
+      <div class="add-attraction-form">
+        <select #typeSelect>
+          <option *ngFor="let type of attractionTypes" [value]="type">
+            {{ type }}
+          </option>
+        </select>
+        <input type="text" #descInput placeholder="Description" />
+        <input type="date" #startInput />
+        <input type="time" #timeInput />
+        <button
+          (click)="addAttraction(
+            tripId,
+            getAttractionType(typeSelect.value),
+            descInput.value,
+            startInput.value,
+            timeInput.value
+          )"
+        >
+          Add Attraction
+        </button>
+      </div>
+    </div>
+
+    <!-- Documents Section -->
+    <div class="trip-section">
+      <h3 id="documents-title">Documents</h3>
+        <app-trip-documents [tripId]="tripId"></app-trip-documents>
+      <ul class="trip-list">
+        <li *ngFor="let doc of trip?.documents" class="trip-item">
+          <strong>{{ doc.name }}</strong> ({{ doc.type }}) - 
+          <a [href]="doc.file_url" target="_blank">View Document</a>
+          <button (click)="deleteDocument(doc.id.toString())" class="delete-btn">X</button>
+        </li>
+      </ul>
     </div>
   </div>
+</div>

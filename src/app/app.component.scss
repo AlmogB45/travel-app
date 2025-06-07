@@ -1,0 +1,41 @@
+/* Header */
+.header {
+  background-color: rgba(255, 255, 255, 0.7); /* semi-transparent white */
+  backdrop-filter: blur(8px); /* blur effect for elegance */
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#title {
+  margin: 0;
+  font-size: 2.5rem;
+  color: #333;
+}
+
+/* Navbar */
+.nav {
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  padding: 10px 0;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+#navbar a {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: #007BFF;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+#navbar a:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+  color: #0056b3;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+}

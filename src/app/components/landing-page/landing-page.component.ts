@@ -27,19 +27,30 @@ export class LandingPageComponent {
   endDate: Date = new Date(); 
 
   onSubmit() {
-
     // Check if any required fields are empty
     if (!this.destinationText || !this.startDate || !this.endDate) {
       return; // Stop the method if validation fails
     }
 
+    const userId = localStorage.getItem('user_id');
+    if (!userId) {
+      alert('You must be logged in to add a trip.');
+      return;
+    }
+
     this.tripService.addTrip(
       this.destinationText,
       this.startDate,
-      this.endDate
-    );
-    this.destinationText = '';
-    this.startDate = new Date();
-    this.endDate = new Date();
+      this.endDate,
+      userId
+    ).subscribe({
+      next: () => {
+        alert('Your trip has been successfully added!');
+        this.destinationText = '';
+        this.startDate = new Date();
+        this.endDate = new Date();
+      },
+      error: () => alert('Failed to add trip.')
+    });
   }
 }

@@ -1,25 +1,33 @@
-<div>
-  <input [(ngModel)]="amount" type="number" placeholder="Amount" />
+<div class="currency-exchange-container">
+  <div class="currency-form-wrapper">
+    <div id="currency-input">
+      <input id="currency-user-input" [(ngModel)]="amount" type="number" placeholder="Amount" />
+    </div>
 
-  <select [(ngModel)]="base" (change)="convert()">
-    <option *ngFor="let symbol of symbols" [value]="symbol.code">
-      {{ symbol.code }} - {{ symbol.name }}
-    </option>
-  </select>
+    <div id="currency-base">
+      <select id="currency-base-select"[(ngModel)]="base" (change)="convert()">
+        <option *ngFor="let symbol of symbols" [value]="symbol.code">
+          {{ symbol.code }} - {{ symbol.name }}
+        </option>
+      </select>
+    </div>
 
-  <select [(ngModel)]="target" (change)="convert()">
-    <option *ngFor="let symbol of symbols" [value]="symbol.code">
-      {{ symbol.code }} - {{ symbol.name }}
-    </option>
-  </select>
+    <div id="currency-target"> 
+      <select id="currency-target-select" [(ngModel)]="target" (change)="convert()">
+        <option *ngFor="let symbol of symbols" [value]="symbol.code">
+          {{ symbol.code }} - {{ symbol.name }}
+        </option>
+      </select>
+    </div>
 
-  <button (click)="convert()">Convert</button>
+    <button (click)="convert()">Convert</button>
 
-  <!-- <div *ngIf="result !== null">
+    <!-- <div *ngIf="result !== null">
       Result: {{ result | number:'1.2-2' }} {{ target }}
     </div> -->
 
-  @if (result !== null) {
-  <div>Result: {{ result | number : "1.2-2" }} {{ target }}</div>
-  }
+    @if (result !== null) {
+    <div id="currency-result">Result: {{ result | number : "1.2-2" }} {{ target }}</div>
+    }
+  </div>
 </div>
