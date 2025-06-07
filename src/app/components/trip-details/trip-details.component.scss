@@ -1,0 +1,98 @@
+.trip-details-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 40px;
+  background-image: #f0f4f8;
+  background-size:auto;
+}
+
+.trip-details-wrapper {
+  background-color: white;
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.trip-title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+#add-attraction-title,
+#attraction-title,
+#documents-title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.trip-dates {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #555;
+}
+
+.trip-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.trip-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 15px;
+}
+
+.trip-item {
+  background-color: #e6f0fa;
+  padding: 15px 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.add-attraction-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.add-attraction-form select,
+.add-attraction-form input,
+.add-attraction-form button {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.add-attraction-form button {
+  background-color: #0077cc;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.add-attraction-form button:hover {
+  background-color: #005fa3;
+}
+
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  color: red;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.delete-btn:hover {
+  color: darkred;
+}

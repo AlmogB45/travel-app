@@ -1,0 +1,22 @@
+<div class="upcoming-trips-container">
+  <div class="upcoming-trips-form-wrapper">
+    <div class="upcoming-trips-content">
+      <h1 id="upcoming-trips-title">Upcoming Trips</h1>
+      <ng-container *ngIf="isLoggedIn()">
+        <ul id="upcoming-trips-list" *ngIf="trips.length > 0">
+          <li *ngFor="let trip of trips; trackBy: trackByTripId">
+            <a [routerLink]="['/trip', trip.id]">
+              {{ trip.destination }} -
+              {{ trip.startDate ? (trip.startDate | date:'shortDate') : '' }} →
+              {{ trip.endDate ? (trip.endDate | date:'shortDate') : '' }}
+            </a>
+          </li>
+        </ul>
+        <div *ngIf="trips.length === 0">
+          No upcoming trips found.
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,42 @@
+/* CSS */
+.landing-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  background-image: #f0f4f8;
+}
+
+.form-wrapper {
+  display: flex;
+  gap: 20px;
+  padding: 80px;
+  margin-bottom: 15%;
+  background-color: white;
+  border-radius: 40px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  align-items: center;
+}
+
+#destination-input input { // Fix alignment between Date picker and Destination Input
+  text-align: center;
+  padding: 20px;
+  width: 250px;
+  margin-bottom: 5%;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1565c0;
+}

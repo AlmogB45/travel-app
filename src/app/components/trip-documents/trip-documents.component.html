@@ -1,0 +1,49 @@
+<div class="trip-section upload-documents-section">
+  <h3>Upload Trip Documents</h3>
+
+  <form (ngSubmit)="onUpload()" class="upload-form">
+    <!-- Document Name -->
+    <div class="form-field">
+      <label for="documentName">Document Name</label>
+      <input
+        type="text"
+        id="documentName"
+        [(ngModel)]="documentName"
+        name="documentName"
+        required
+      />
+    </div>
+
+    <!-- Document Type -->
+    <div class="form-field">
+      <label for="documentType">Document Type</label>
+      <select
+        id="documentType"
+        [(ngModel)]="documentType"
+        name="documentType"
+        required
+      >
+        <option *ngFor="let type of DocsTypes" [ngValue]="type">
+          {{ type }}
+        </option>
+      </select>
+    </div>
+
+    <!-- File Selection -->
+    <div class="form-field">
+      <label for="fileInput">Select Document</label>
+      <input
+        type="file"
+        id="fileInput"
+        (change)="onFileSelected($event)"
+        required
+      />
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="upload-btn">Upload Document</button>
+
+    <!-- Error Message -->
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+  </form>
+</div>

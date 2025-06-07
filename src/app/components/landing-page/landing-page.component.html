@@ -1,0 +1,24 @@
+<!-- HTML -->
+<div class="landing-page-container">
+  <div class="form-wrapper">
+    <!-- Destination Input -->
+    <div id="destination-input">
+      <input type="text" [(ngModel)]="destinationText" placeholder="Destination" />
+    </div>
+
+    <!-- Date Range Picker -->
+    <mat-form-field id="date-range-picker" appearance="fill">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate [(ngModel)]="startDate" placeholder="Start date" />
+        <input matEndDate [(ngModel)]="endDate" placeholder="End date" />
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+
+    <!-- Submit Button -->
+    <button (click)="onSubmit()">Submit</button>
+  </div>
+</div>

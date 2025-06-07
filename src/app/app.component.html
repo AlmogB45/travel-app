@@ -1,1 +1,13 @@
-<h1>Hello World</h1>
+<div class="header">
+  <h1 id="title">Welcome to Travel App!</h1>
+</div>
+
+<div class="nav">
+  <nav id="navbar">
+    | <a routerLink="/home">Trip Planner</a> |
+    <a routerLink="/currency-exchange">Currency Exchange</a> |
+    <a routerLink="/upcoming-trips">Upcoming Trips</a> |
+    <button (click)="logout()">Logout</button>
+  </nav>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,30 @@
+<div class="register-container">
+  <div class="register-form-wrapper">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <h2 id="register-title">User Registration</h2>
+      <p id="register-description">
+        Please fill in the form below to create an account.
+      </p>
+
+      <div class="register-input">
+        <input
+          formControlName="email"
+          type="email"
+          placeholder="Enter your Email Address"
+        />
+      </div>
+
+      <div class="register-input">
+        <input
+          formControlName="password"
+          type="password"
+          placeholder="Enter your Password"
+        />
+      </div>
+
+      <div class="register-button">
+        <button type="submit">Register</button>
+      </div>
+    </form>
+  </div>
+</div>

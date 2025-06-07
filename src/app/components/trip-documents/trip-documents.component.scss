@@ -1,0 +1,60 @@
+.upload-documents-section {
+    background-color: #f9fbfd;
+    padding: 25px 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .upload-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .form-field label {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .form-field input,
+  .form-field select {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-field input:focus,
+  .form-field select:focus {
+    border-color: #0077cc;
+    outline: none;
+  }
+  
+  .upload-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: #0077cc;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+  }
+  
+  .upload-btn:hover {
+    background-color: #005fa3;
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: 500;
+  }
+  
